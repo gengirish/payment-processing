@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * Global exception handler for handling various exceptions in the application.
  */
 @RestControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler {
 
     /**
@@ -21,7 +20,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(PaymentNotFoundException.class)
     public ResponseEntity<ErrorResponse> handlePaymentNotFoundException(PaymentNotFoundException ex) {
-        log.error("Payment not found: {}", ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(), ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
@@ -34,7 +32,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(InvalidPaymentRequestException.class)
     public ResponseEntity<ErrorResponse> handleInvalidPaymentRequestException(InvalidPaymentRequestException ex) {
-        log.error("Invalid payment request: {}", ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
@@ -47,7 +44,6 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
-        log.error("An error occurred: {}", ex.getMessage());
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.value(), "An unexpected error occurred.");
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }

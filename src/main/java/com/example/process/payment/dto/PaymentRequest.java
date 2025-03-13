@@ -8,12 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 /**
  * Represents a payment request.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PaymentRequest {
     @NotNull(message = "Amount is required")
     @Positive(message = "Amount must be greater than zero")
@@ -25,4 +23,28 @@ public class PaymentRequest {
     @Email(message = "Invalid email format")
     @NotBlank(message = "Customer email is required")
     private String customerEmail;
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
 }

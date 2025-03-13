@@ -6,7 +6,7 @@ import com.example.process.payment.dto.PaymentStatusResponse;
 import com.example.process.payment.dto.RefundResponse;
 import com.example.process.payment.service.PaymentService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +17,14 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/payments")
-@RequiredArgsConstructor
 public class PaymentController {
 
+    @Autowired
     private final PaymentService paymentService;
+
+    public PaymentController(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
 
     /**
      * Initiates a payment.
