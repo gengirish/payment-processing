@@ -19,4 +19,14 @@ public class ErrorResponseTest {
         assertEquals(404, errorResponse.getStatus());
         assertEquals("Not Found", errorResponse.getMessage());
     }
+
+    @Test
+    public void testErrorResponseSetterGetter() {
+        ErrorResponse errorResponse = new ErrorResponse(404, "Not Found");
+        errorResponse.setStatus(500);
+        errorResponse.setMessage("new");
+
+        assertEquals(500, errorResponse.getStatus());
+        assertEquals("new", errorResponse.getMessage());
+    }
 }
