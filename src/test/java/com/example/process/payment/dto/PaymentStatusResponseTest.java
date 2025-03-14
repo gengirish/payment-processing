@@ -4,8 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit tests for the PaymentStatusResponse class.
+ */
 public class PaymentStatusResponseTest {
 
+    /**
+     * Tests the PaymentStatusResponse constructor and setters.
+     * Verifies that the fields are set correctly.
+     */
     @Test
     public void testPaymentStatusResponse() {
         PaymentStatusResponse response = new PaymentStatusResponse();

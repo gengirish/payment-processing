@@ -16,6 +16,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+/**
+ * Unit tests for the PaymentController class.
+ */
 public class PaymentControllerTest {
 
     @Mock
@@ -26,12 +29,20 @@ public class PaymentControllerTest {
 
     private MockMvc mockMvc;
 
+    /**
+     * Sets up the test environment before each test.
+     * Initializes mocks and builds the MockMvc instance.
+     */
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(paymentController).build();
     }
 
+    /**
+     * Tests the initiatePayment method.
+     * Verifies that a payment is initiated and the correct response is returned.
+     */
     @Test
     public void testInitiatePayment() throws Exception {
         PaymentRequest request = new PaymentRequest();
@@ -51,6 +62,10 @@ public class PaymentControllerTest {
                 .andExpect(jsonPath("$.paymentUrl").value("http://payment.url"));
     }
 
+    /**
+     * Tests the getPaymentStatus method.
+     * Verifies that the payment status is retrieved and the correct response is returned.
+     */
     @Test
     public void testGetPaymentStatus() throws Exception {
         PaymentStatusResponse response = new PaymentStatusResponse("12345", "SUCCESS");
@@ -63,6 +78,10 @@ public class PaymentControllerTest {
                 .andExpect(jsonPath("$.status").value("SUCCESS"));
     }
 
+    /**
+     * Tests the processRefund method.
+     * Verifies that a refund is processed and the correct response is returned.
+     */
     @Test
     public void testProcessRefund() throws Exception {
         RefundResponse response = new RefundResponse();
@@ -76,6 +95,10 @@ public class PaymentControllerTest {
                 .andExpect(jsonPath("$.status").value("REFUNDED"));
     }
 
+    /**
+     * Tests the handleWebhook method.
+     * Verifies that the webhook event is handled correctly.
+     */
     @Test
     public void testHandleWebhook() throws Exception {
         mockMvc.perform(post("/api/payments/webhook")

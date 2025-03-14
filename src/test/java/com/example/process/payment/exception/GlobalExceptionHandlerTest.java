@@ -6,10 +6,17 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Unit tests for the GlobalExceptionHandler class.
+ */
 public class GlobalExceptionHandlerTest {
 
     private final GlobalExceptionHandler handler = new GlobalExceptionHandler();
 
+    /**
+     * Tests the handlePaymentNotFoundException method.
+     * Verifies that the correct response is returned for a PaymentNotFoundException.
+     */
     @Test
     public void testHandlePaymentNotFoundException() {
         PaymentNotFoundException ex = new PaymentNotFoundException("Payment not found");
@@ -18,6 +25,10 @@ public class GlobalExceptionHandlerTest {
         assertEquals("Payment not found", response.getBody().getMessage());
     }
 
+    /**
+     * Tests the handleInvalidPaymentRequestException method.
+     * Verifies that the correct response is returned for an InvalidPaymentRequestException.
+     */
     @Test
     public void testHandleInvalidPaymentRequestException() {
         InvalidPaymentRequestException ex = new InvalidPaymentRequestException("Invalid request");
@@ -26,6 +37,10 @@ public class GlobalExceptionHandlerTest {
         assertEquals("Invalid request", response.getBody().getMessage());
     }
 
+    /**
+     * Tests the handleGeneralException method.
+     * Verifies that the correct response is returned for a general Exception.
+     */
     @Test
     public void testHandleGeneralException() {
         Exception ex = new Exception("General error");

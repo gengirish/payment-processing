@@ -6,27 +6,74 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entity class representing a payment.
+ * This class maps to the "payments" table in the database.
+ */
 @Entity
 @Table(name = "payments")
 public class Payment {
+
+    /**
+     * The unique identifier for the payment.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * The transaction ID associated with the payment.
+     */
     private String transactionId;
+
+    /**
+     * The status of the payment.
+     */
     private String status;
+
+    /**
+     * The amount of the payment.
+     */
     private Double amount;
+
+    /**
+     * The currency of the payment.
+     */
     private String currency;
+
+    /**
+     * The email of the customer making the payment.
+     */
     private String customerEmail;
+
+    /**
+     * The provider of the payment service.
+     */
     private String provider;
+
+    /**
+     * The URL for the payment.
+     */
     private String paymentUrl;
+
+    /**
+     * The external payment ID provided by the payment gateway.
+     */
     private String externalPaymentId;
 
+    /**
+     * The timestamp when the payment was created.
+     */
     @CreationTimestamp
     private LocalDateTime createdAt;
 
+    /**
+     * The timestamp when the payment was last updated.
+     */
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    // Getters and setters...
 
     public Long getId() {
         return id;

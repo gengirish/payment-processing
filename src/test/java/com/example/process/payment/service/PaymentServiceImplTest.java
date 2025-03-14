@@ -15,10 +15,14 @@ import org.mockito.MockitoAnnotations;
 import java.util.Map;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * Unit tests for the PaymentServiceImpl class.
+ */
 public class PaymentServiceImplTest {
 
     @Mock
@@ -30,11 +34,19 @@ public class PaymentServiceImplTest {
     @InjectMocks
     private PaymentServiceImpl paymentService;
 
+    /**
+     * Sets up the test environment before each test.
+     * Initializes mocks and injects them into the paymentService instance.
+     */
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
+    /**
+     * Tests the initiatePayment method.
+     * Verifies that a payment is initiated and saved correctly.
+     */
     @Test
     public void testInitiatePayment() {
         PaymentRequest request = new PaymentRequest();
@@ -55,6 +67,10 @@ public class PaymentServiceImplTest {
         verify(paymentRepository, times(1)).save(any(Payment.class));
     }
 
+    /**
+     * Tests the getPaymentStatus method.
+     * Verifies that the payment status is retrieved correctly.
+     */
     @Test
     public void testGetPaymentStatus() {
         Payment payment = new Payment();
@@ -68,6 +84,10 @@ public class PaymentServiceImplTest {
         assertEquals("SUCCESS", response.getStatus());
     }
 
+    /**
+     * Tests the getPaymentStatus method when the payment is not found.
+     * Verifies that a PaymentNotFoundException is thrown.
+     */
     @Test
     public void testGetPaymentStatus_NotFound() {
         when(paymentRepository.findByTransactionId("12345")).thenReturn(Optional.empty());
@@ -75,6 +95,10 @@ public class PaymentServiceImplTest {
         assertThrows(PaymentNotFoundException.class, () -> paymentService.getPaymentStatus("12345"));
     }
 
+    /**
+     * Tests the processRefund method.
+     * Verifies that a refund is processed and saved correctly.
+     */
     @Test
     public void testProcessRefund() {
         Payment payment = new Payment();
@@ -93,6 +117,10 @@ public class PaymentServiceImplTest {
         verify(paymentRepository, times(1)).save(any(Payment.class));
     }
 
+    /**
+     * Tests the processRefund method with an invalid request.
+     * Verifies that an InvalidPaymentRequestException is thrown.
+     */
     @Test
     public void testProcessRefund_InvalidRequest() {
         Payment payment = new Payment();
@@ -103,6 +131,10 @@ public class PaymentServiceImplTest {
         assertThrows(InvalidPaymentRequestException.class, () -> paymentService.processRefund("12345", 50.0));
     }
 
+    /**
+     * Tests the handleWebhookEvent method.
+     * Verifies that the payment status is updated correctly based on the webhook event.
+     */
     @Test
     public void testHandleWebhookEvent() {
         Payment payment = new Payment();
