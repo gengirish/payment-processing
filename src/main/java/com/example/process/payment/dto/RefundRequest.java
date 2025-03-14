@@ -9,8 +9,6 @@ import org.hibernate.validator.constraints.NotBlank;
 /**
  * Represents a refund request.
  */
-@Data
-@NoArgsConstructor
 public class RefundRequest {
     @NotBlank(message = "Transaction ID is required")
     private String transactionId;
@@ -21,6 +19,22 @@ public class RefundRequest {
 
     public RefundRequest(String transactionId, Double amount) {
         this.transactionId = transactionId;
+        this.amount = amount;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 }

@@ -6,7 +6,7 @@ import com.example.process.payment.exception.InvalidPaymentRequestException;
 import com.example.process.payment.exception.PaymentNotFoundException;
 import com.example.process.payment.model.Payment;
 import com.example.process.payment.repository.PaymentRepository;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -15,11 +15,17 @@ import java.util.Map;
  * Implementation of the PaymentService interface.
  */
 @Service
-@RequiredArgsConstructor
+
 public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final PaymentGatewayClient paymentGatewayClient;
+
+    @Autowired
+    public PaymentServiceImpl(PaymentRepository paymentRepository, PaymentGatewayClient paymentGatewayClient) {
+        this.paymentRepository = paymentRepository;
+        this.paymentGatewayClient = paymentGatewayClient;
+    }
 
     /**
      * Initiates a payment.

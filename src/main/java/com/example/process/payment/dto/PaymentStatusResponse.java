@@ -1,16 +1,33 @@
 package com.example.process.payment.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * Represents the response for a refund request.
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class PaymentStatusResponse {
     private String transactionId;
     private String status;
+
+    public PaymentStatusResponse() {
+    }
+
+    public PaymentStatusResponse(String transactionId, String status) {
+        this.transactionId = transactionId;
+        this.status = status;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

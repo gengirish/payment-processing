@@ -24,6 +24,15 @@ public class PaymentRequest {
     @NotBlank(message = "Customer email is required")
     private String customerEmail;
 
+    public PaymentRequest() {
+    }
+
+    public PaymentRequest(Double amount, String currency, String customerEmail) {
+        this.amount = amount;
+        this.currency = currency;
+        this.customerEmail = customerEmail;
+    }
+
     public Double getAmount() {
         return amount;
     }
